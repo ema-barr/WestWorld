@@ -1,6 +1,5 @@
 #ifndef DOHOUSEWORK_H
 #define DOHOUSEWORK_H
-#pragma once
 
 #include "State.h"
 #include "MinersWife.h"

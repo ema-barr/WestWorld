@@ -1,7 +1,6 @@
 #ifndef GO_HOME_AND_SLEEP_H
 #define GO_HOME_AND_SLEEP_H
 
-#pragma once
 #include "State.h"
 
 class Miner;

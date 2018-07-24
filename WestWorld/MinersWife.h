@@ -1,6 +1,5 @@
 #ifndef MINERSWIFE_H
 #define MINERSWIFE_H
-#pragma once
 
 #include "BaseGameEntity.h"
 #include "StateMachine.h"

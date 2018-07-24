@@ -1,6 +1,5 @@
 #ifndef QUENCH_THIRST_H
 #define QUENCH_THIRST_H
-#pragma once
 #include "State.h"
 
 class Miner;

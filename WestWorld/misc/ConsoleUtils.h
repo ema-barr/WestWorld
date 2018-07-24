@@ -1,6 +1,6 @@
 #ifndef CONSOLE_UTILS_H
 #define CONSOLE_UTILS_H
-#pragma once
+
 //------------------------------------------------------------------------
 //
 //  Name:   ConsoleUtils.h

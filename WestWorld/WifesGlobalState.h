@@ -1,7 +1,6 @@
 #ifndef WIFESGLOBALSTATE_H
 #define WIFESGLOBALSTATE_H
 
-#pragma once
 #include "State.h"
 #include "MinersWife.h"
 

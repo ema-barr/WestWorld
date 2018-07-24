@@ -1,7 +1,6 @@
 #ifndef VISIT_BANK_H
 #define VISIT_BANK_H
 
-#pragma once
 #include "State.h"
 
 class Miner;

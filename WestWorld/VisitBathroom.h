@@ -1,7 +1,6 @@
 #ifndef VISITBATHROOM_H
 #define VISITBATHROOM_H
 
-#pragma once
 #include "State.h"
 #include "MinersWife.h"
 class VisitBathroom : public State <MinersWife>

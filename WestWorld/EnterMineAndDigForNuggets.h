@@ -1,7 +1,6 @@
 #ifndef ENTER_MINE_AND_DIG_FOR_NUGGETS_H
 #define ENTER_MINE_AND_DIG_FOR_NUGGETS_H
 
-#pragma once
 #include "State.h"
 
 class Miner;

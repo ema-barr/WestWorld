@@ -1,7 +1,6 @@
 #ifndef MINER_H
 #define MINER_H
 
-#pragma once
 #include "BaseGameEntity.h"
 #include "Locations.h"
 #include "StateMachine.h"
