@@ -2,6 +2,7 @@
 #include "DoHousework.h"
 #include "EntityNames.h"
 #include <iostream>
+#include <random>
 
 using namespace std;
 
@@ -18,8 +19,11 @@ void DoHousework::Enter(MinersWife * wife)
 void DoHousework::Execute(MinersWife * wife)
 {
 	//generate random number between 0 and 2
-	int random = rand() % 3;
-	switch (random)
+	random_device rd;
+	mt19937 mt(rd());
+	uniform_int_distribution<int> dist(0, 2);
+
+	switch (dist(mt))
 	{
 	case 0:
 

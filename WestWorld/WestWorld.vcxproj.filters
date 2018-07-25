@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="File di origine\misc">
-      <UniqueIdentifier>{61ac77e8-8f33-4884-b6ef-cb8a2b796465}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -45,9 +42,6 @@
     <ClInclude Include="EntityNames.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
-    <ClInclude Include="ConsoleUtils.h">
-      <Filter>File di origine\misc</Filter>
-    </ClInclude>
     <ClInclude Include="GoHomeAndSleepTilRested.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
@@ -70,6 +64,15 @@
       <Filter>File di intestazione</Filter>
     </ClInclude>
     <ClInclude Include="WifesGlobalState.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageTypes.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageDispatcher.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
   </ItemGroup>
@@ -109,6 +112,12 @@
     </ClCompile>
     <ClCompile Include="WifesGlobalState.cpp">
       <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageDispatcher.cpp">
+      <Filter>File di intestazione</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>File di intestazione</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
