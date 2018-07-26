@@ -37,6 +37,11 @@ void Miner::Update() {
 	m_pStateMachine->Update();
 }
 
+bool Miner::HandleMessage(const Telegram & message)
+{
+	return m_pStateMachine->HandleMessage(message);
+}
+
 StateMachine<Miner>* Miner::GetFSM()const {
 	return m_pStateMachine;
 }

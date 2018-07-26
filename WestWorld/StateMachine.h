@@ -79,6 +79,23 @@ public:
 	bool isInState(const State<entity_type>& st) const {
 		return typeid(*m_pCurrentState) == typeid(st);
 	}
+
+	bool HandleMessage(const Telegram& msg) const
+	{
+		//first see if the current state is valide and it can handle the message
+		if (m_pCurrentState && m_pCurrentState->OnMessage(m_pOwner, msg))
+		{
+			return true;
+		}
+
+		//if not, and if a global state has been implemented, send the message to the global state
+		if (m_pGlobalState && m_pGlobalState->OnMessage(m_pOwner, msg))
+		{
+			return true;
+		}
+
+		return false;
+	}
 };
 
 #endif // !STATE_MACHINE_H

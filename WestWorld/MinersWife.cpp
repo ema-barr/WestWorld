@@ -24,6 +24,11 @@ void MinersWife::Update()
 	m_pStateMachine->Update();
 }
 
+bool MinersWife::HandleMessage(const Telegram & message)
+{
+	return m_pStateMachine->HandleMessage(message);
+}
+
 StateMachine<MinersWife>* MinersWife::GetFSM() const
 {
 	return m_pStateMachine;

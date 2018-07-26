@@ -1,5 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
+#include "messaging/Telegram.h"
 
 class BaseGameEntity
 {
@@ -21,5 +22,7 @@ public:
 	virtual void Update() = 0;
 
 	int ID() const;
+
+	virtual bool HandleMessage(const Telegram& message) = 0;
 };
 #endif // !ENTITY_H

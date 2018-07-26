@@ -16,7 +16,8 @@ public:
 	MinersWife(int id);
 	~MinersWife();
 
-	void Update();
+	void Update() override;
+	bool HandleMessage(const Telegram& message) override;
 
 	StateMachine<MinersWife>* GetFSM()const;
 

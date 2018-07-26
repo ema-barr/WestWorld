@@ -41,7 +41,8 @@ public:
 	Miner(int id);
 	~Miner();
 
-	void Update();
+	void Update() override;
+	bool HandleMessage(const Telegram& message) override;
 
 	StateMachine<Miner>* GetFSM() const;
 
