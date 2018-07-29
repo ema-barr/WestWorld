@@ -2,6 +2,14 @@
 #include "WifesGlobalState.h"
 #include "VisitBathroom.h"
 #include <random>
+#include "MessageTypes.h"
+#include "EntityNames.h"
+#include "time/CrudeTimer.h"
+#include "misc/ConsoleUtils.h"
+#include "CookStew.h"
+
+
+
 using namespace std;
 
 WifesGlobalState * WifesGlobalState::Instance()
@@ -30,4 +38,29 @@ void WifesGlobalState::Execute(MinersWife * wife)
 
 void WifesGlobalState::Exit(MinersWife * wifer)
 {
+}
+
+bool WifesGlobalState::OnMessage(MinersWife * wife, const Telegram & msg)
+{
+
+	switch(msg.msg)
+	{
+	case Msg_HiHoneyImHome:
+		{
+		SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
+		cout << "\nMessage handled by " << GetNameOfEntity(wife->ID())
+			<< " at time: " << Clock->GetCurrentTime();
+
+		SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
+		cout << "\n" << GetNameOfEntity(wife->ID()) <<
+			": Hi honey. Let me make some of mah fine country stew";
+
+		wife->GetFSM()->ChangeState(CookStew::Instance());
+		}
+		return true;
+	}
+
+	return false;
 }

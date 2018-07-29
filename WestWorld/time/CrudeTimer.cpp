@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "CrudeTimer.h"
 
 CrudeTimer * CrudeTimer::Instance()

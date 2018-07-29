@@ -1,7 +1,7 @@
 #ifndef STATE_H
 #define STATE_H
 
-class Telegram;
+struct Telegram;
 
 template<class entity_type>
 class State

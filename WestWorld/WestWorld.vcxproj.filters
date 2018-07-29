@@ -75,6 +75,18 @@
     <ClInclude Include="EntityManager.h">
       <Filter>File di intestazione</Filter>
     </ClInclude>
+    <ClInclude Include="CookStew.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="time\CrudeTimer.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="misc\ConsoleUtils.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
+    <ClInclude Include="EatStew.h">
+      <Filter>File di intestazione</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -113,10 +125,19 @@
     <ClCompile Include="WifesGlobalState.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>File di intestazione</Filter>
-    </ClCompile>
     <ClCompile Include="MessageDispatcher.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="CookStew.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="time\CrudeTimer.cpp">
+      <Filter>File di origine</Filter>
+    </ClCompile>
+    <ClCompile Include="EatStew.cpp">
       <Filter>File di origine</Filter>
     </ClCompile>
   </ItemGroup>

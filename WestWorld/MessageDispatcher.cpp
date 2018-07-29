@@ -2,6 +2,7 @@
 #include "MessageDispatcher.h"
 #include "EntityManager.h"
 #include "time/CrudeTimer.h"
+#include "misc/ConsoleUtils.h"
 #include <chrono>
 #include <iostream>
 #include "EntityNames.h"
@@ -41,9 +42,12 @@ void MessageDispatcher::DispatchMessages(double delay, int sender, int receiver,
 	//if there is no delay, routhe the telegram
 	if (delay <= 0.0)
 	{
+		SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 		std::cout << "\nInstant telegram dispatched at time: " << Clock->GetCurrentTime()
 			<< " by " << GetNameOfEntity(pSender->ID()) << " for " << GetNameOfEntity(pReceiver->ID())
 			<< ". Msg is " << MsgToStr(msg);
+		SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 
 
@@ -57,9 +61,14 @@ void MessageDispatcher::DispatchMessages(double delay, int sender, int receiver,
 
 		PriorityQ.insert(telegram);
 
+		SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 		std::cout << "\nDelayed telegram from " << GetNameOfEntity(pSender->ID()) << " recorded at time "
 			<< Clock->GetCurrentTime() << " for " << GetNameOfEntity(pReceiver->ID())
 			<< ". Msg is " << MsgToStr(msg);
+
+		SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 	}
 }
 
@@ -80,9 +89,14 @@ void MessageDispatcher::DispatchDelayedMessages()
 
 		//find the recipient
 		BaseGameEntity* pReceiver = EntityMgr->GetEntityFromID(telegram.receiver);
+		
+		SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 		std::cout << "\nQueued telegram ready for dispatch: Sent to "
 			<< GetNameOfEntity(pReceiver->ID()) << ". Msg is " << MsgToStr(telegram.msg);
+
+		SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
 
 		//send the telegram to the recipient
 		Discharge(pReceiver, telegram);

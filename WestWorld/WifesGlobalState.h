@@ -19,6 +19,8 @@ public:
 
 	virtual void Exit(MinersWife * wifer) override;
 
+	bool OnMessage(MinersWife*, const Telegram&) override;
+
 };
 
 #endif

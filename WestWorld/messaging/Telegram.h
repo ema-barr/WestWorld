@@ -1,5 +1,7 @@
 #ifndef TELEGRAM_H
 #define TELEGRAM_H
+#include <iostream>
+#include <math.h>
 
 struct Telegram
 {

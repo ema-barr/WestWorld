@@ -3,6 +3,8 @@
 #include <set>
 #include "messaging/Telegram.h"
 
+#define Dispatch MessageDispatcher::Instance()
+
 //to make code easier to read
 const double SEND_MSG_IMMEDIATELY = 0.0f;
 const int   NO_ADDITIONAL_INFO = 0;
@@ -33,6 +35,5 @@ public:
 	void DispatchDelayedMessages();
 };
 
-#define Dispatch MessageDispatcher::Instance();
 
 #endif

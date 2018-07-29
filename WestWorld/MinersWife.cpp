@@ -43,3 +43,13 @@ void MinersWife::ChangeLocation(const location_type loc)
 {
 	m_Location = loc;
 }
+
+void MinersWife::SetCooking(bool cooking)
+{
+	m_bCooking = cooking;
+}
+
+bool MinersWife::Cooking()
+{
+	return m_bCooking;
+}

@@ -12,6 +12,8 @@ private:
 	StateMachine<MinersWife>*  m_pStateMachine;
 
 	location_type              m_Location;
+
+	bool m_bCooking;
 public:
 	MinersWife(int id);
 	~MinersWife();
@@ -23,6 +25,9 @@ public:
 
 	location_type Location()const;
 	void ChangeLocation(const location_type loc);
+
+	void SetCooking(bool);
+	bool Cooking();
 };
 
 

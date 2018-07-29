@@ -57,3 +57,8 @@ void VisitBankAndDepositGold::Exit(Miner * pMiner)
 	cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 		<< "Leavin' the bank";
 }
+
+bool VisitBankAndDepositGold::OnMessage(Miner*, const Telegram&)
+{
+	return false;
+}

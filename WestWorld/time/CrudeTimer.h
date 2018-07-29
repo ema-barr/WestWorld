@@ -1,5 +1,6 @@
 #ifndef CRUDETIMER_H
 #define CRUDETIMER_H
+
 //------------------------------------------------------------------------
 //
 //  Name:   CrudeTimer.h
@@ -10,11 +11,8 @@
 //
 //------------------------------------------------------------------------
 
-//this library must be included
-#pragma comment(lib, "winmm.lib")
 
 #include <chrono>
-
 
 
 #define Clock CrudeTimer::Instance()
@@ -49,7 +47,7 @@ public:
 	double GetCurrentTime()
 	{
 		auto current_time = std::chrono::system_clock::now();
-		auto duration_in_seconds = std::chrono::duration<double>(current_time.time_since_epoch());
+		auto duration_in_seconds = std::chrono::duration<double>(current_time.time_since_epoch());  //senza nulla vicino al double vuol dire che prendo i secondi.
 
 		return duration_in_seconds.count() - m_dStartTime;
 	}

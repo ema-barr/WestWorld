@@ -14,6 +14,8 @@ public:
 	virtual void Enter(MinersWife * wife) override;
 	virtual void Execute(MinersWife * wife) override;
 	virtual void Exit(MinersWife * wife) override;
+
+	bool OnMessage(MinersWife*, const Telegram&) override;
 };
 
 #endif // !VISITBATHROOM_H

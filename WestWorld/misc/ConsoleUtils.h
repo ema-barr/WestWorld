@@ -14,6 +14,10 @@
 #include <conio.h>
 #include <iostream>
 
+#ifdef GetCurrentTime        //messo perchè altrimenti va in conflitto con la member function di CrudeTimer
+#undef GetCurrentTime
+#endif
+
 //default text colors can be found in wincon.h
 inline void SetTextColor(WORD colors)
 {

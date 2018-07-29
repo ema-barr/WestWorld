@@ -7,6 +7,10 @@
 #include "EntityNames.h"
 #include "Locations.h"
 #include "misc/ConsoleUtils.h"
+#include "MessageDispatcher.h"
+#include "MessageTypes.h"
+#include "time/CrudeTimer.h"
+#include "EatStew.h"
 using namespace std;
 
 GoHomeAndSleepTilRested::GoHomeAndSleepTilRested()
@@ -25,7 +29,14 @@ void GoHomeAndSleepTilRested::Enter(Miner * pMiner)
 		pMiner->ChangeLocation(shack);
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 			<< "Walkin' home";
+
+		Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+			pMiner->ID(),
+			ent_Elsa,
+			Msg_HiHoneyImHome,
+			NO_ADDITIONAL_INFO);
 	}
+
 }
 	
 
@@ -48,4 +59,29 @@ void GoHomeAndSleepTilRested::Exit(Miner * pMiner)
 {
 	cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 		<< "Leaving the house";
+}
+
+bool GoHomeAndSleepTilRested::OnMessage(Miner * pMiner, const Telegram & msg)
+{
+
+	switch (msg.msg)
+	{
+	case Msg_StewReady:
+		{
+			SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
+			cout << "\nMessage handled by " << GetNameOfEntity(pMiner->ID())
+				<< " at time: " << Clock->GetCurrentTime();
+
+			SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+
+			cout << "\n" << GetNameOfEntity(pMiner->ID())
+				<< ": Okay hun, ahm a-comin!";
+
+			pMiner->GetFSM()->ChangeState(EatStew::Instance());
+
+		}
+		return true;
+	}
+	return false;
 }

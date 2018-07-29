@@ -22,6 +22,7 @@ public:
 
 	virtual void Exit(Miner * pMiner) override;
 
+	bool OnMessage(Miner*, const Telegram&) override;
 
 };
 

@@ -48,3 +48,8 @@ void DoHousework::Execute(MinersWife * wife)
 void DoHousework::Exit(MinersWife * wife)
 {
 }
+
+bool DoHousework::OnMessage(MinersWife *, const Telegram &)
+{
+	return false;
+}
