@@ -53,6 +53,11 @@ bool WifesGlobalState::OnMessage(MinersWife * wife, const Telegram & msg)
 			for (int i = 0; i <3 ; i++)
 			{
 				string quote = wife->GetInsultQuote();
+				if (quote == "")
+				{
+					//Wife does not know other quotes
+					break;
+				}
 				Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 					wife->ID(),
 					ent_Miner_Bob,

@@ -135,7 +135,7 @@ void Miner::SetInsultQuotes(const std::vector<std::string>* quotes)
 	m_insultQuotesAvailable = *quotes;
 }
 
-void Miner::AddInsulQuote(const std::string & quote)
+void Miner::AddInsultQuote(const std::string & quote)
 {
 	//Check if the miner already knows the quote
 	if (std::find(m_insultQuotes.begin(), m_insultQuotes.end(), quote) == m_insultQuotes.end()) //if it is not found

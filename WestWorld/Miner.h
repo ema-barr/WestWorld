@@ -77,7 +77,7 @@ public:
 	void DecreaseFatigue();
 
 	void SetInsultQuotes(const std::vector<std::string> * quotes);
-	void AddInsulQuote(const std::string &quote);
+	void AddInsultQuote(const std::string &quote);
 	std::string GetInsultQuote();
 	void RememberInsultQuotes();
 

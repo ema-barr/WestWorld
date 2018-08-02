@@ -85,7 +85,7 @@ bool GoHomeAndSleepTilRested::OnMessage(Miner * pMiner, const Telegram & msg)
 	case Msg_LearnNewInsultQuote:
 		{
 			string newQuote = DereferenceToType<string>(msg.extraInfo);
-			pMiner->AddInsulQuote(newQuote);
+			pMiner->AddInsultQuote(newQuote);
 		}
 		return true;
 	case Msg_StewReady:
