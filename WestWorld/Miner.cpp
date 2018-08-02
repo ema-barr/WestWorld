@@ -5,6 +5,7 @@
 
 #include "EnterMineAndDigForNuggets.h"
 #include "GoHomeAndSleepTilRested.h"
+#include <random>
 
 
 Miner::Miner(int id):
@@ -13,7 +14,8 @@ Miner::Miner(int id):
 	m_iGoldCarried(0),
 	m_iMoneyInBank(0),
 	m_iThirst(0),
-	m_iFatigue(0)
+	m_iFatigue(0),
+	m_loser(false)
 {
 	//set up state machine
 	m_pStateMachine = new StateMachine<Miner>(this);
@@ -125,5 +127,54 @@ void Miner::IncreaseFatigue()
 void Miner::DecreaseFatigue()
 {
 	m_iFatigue -= 1;
+}
+
+void Miner::SetInsultQuotes(const std::vector<std::string>* quotes)
+{
+	m_insultQuotes = *quotes;
+	m_insultQuotesAvailable = *quotes;
+}
+
+void Miner::AddInsulQuote(const std::string & quote)
+{
+	//Check if the miner already knows the quote
+	if (std::find(m_insultQuotes.begin(), m_insultQuotes.end(), quote) == m_insultQuotes.end()) //if it is not found
+	{
+		m_insultQuotesAvailable.push_back(quote);
+		m_insultQuotes.push_back(quote);
+	} 
+	
+}
+
+std::string Miner::GetInsultQuote()
+{
+	if (m_insultQuotesAvailable.size() > 0)
+	{
+		std::random_device rd;
+		std::mt19937 mt(rd());
+		std::uniform_int_distribution<int> dist(0, (int) m_insultQuotesAvailable.size() - 1);
+
+		int numQuote = dist(mt);
+		std::string insult = m_insultQuotesAvailable[numQuote];
+		m_insultQuotesAvailable.erase(m_insultQuotesAvailable.begin() + numQuote);
+
+		return insult;
+	}
+	return "";
+}
+
+void Miner::RememberInsultQuotes()
+{
+	m_insultQuotesAvailable = m_insultQuotes;
+}
+
+void Miner::SetLoser(bool loser)
+{
+	m_loser = loser;
+}
+
+bool Miner::Loser()
+{
+	return m_loser;
 }
 

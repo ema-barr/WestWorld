@@ -4,16 +4,27 @@
 #include "EnterMineAndDigForNuggets.h"
 #include "EntityNames.h"
 #include <iostream>
+#include "MessageDispatcher.h"
+#include "MessageTypes.h"
+#include "MinerInsults.h"
+#include "MinerDrinkingState.h"
+#include "GoHomeAndSleepTilRested.h"
 using namespace std;
 
 QuenchThirst::QuenchThirst()
 {
+	mInsulted = false;
 }
 
 QuenchThirst * QuenchThirst::Instance()
 {
 	static QuenchThirst instance;
 	return &instance;
+}
+
+StateMachine<Miner>* QuenchThirst::GetFSMInsultFight()
+{
+	return m_StateMachineInsultFight;
 }
 
 void QuenchThirst::Enter(Miner * pMiner)
@@ -23,18 +34,37 @@ void QuenchThirst::Enter(Miner * pMiner)
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 			<< "Boy, ah sure is thusty! Walkin' to the saloon";
 	}
-	
+
+	m_StateMachineInsultFight = new StateMachine<Miner>(pMiner);
+	m_StateMachineInsultFight->SetCurrentState(MinerDrinkingState::Instance(m_StateMachineInsultFight));
+	m_StateMachineInsultFight->SetGlobalState(nullptr);
+
+	//alert the bar fly that Bob enters the saloon
+	Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+		pMiner->ID(),
+		ent_John,
+		Msg_MinerEntersSaloon,
+		NO_ADDITIONAL_INFO);
 }
 
 void QuenchThirst::Execute(Miner * pMiner)
 {
-	//if miner feel thirsty
-	if (pMiner->Thirsty()) {
+	if (mInsulted)
+	{
+		m_StateMachineInsultFight->Update();
+	} else if (pMiner->Thirsty() && !pMiner->Loser()) {
+		//if miner feel thirsty
 		pMiner->BuyAndDrinkAWhiskey();
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 			<< "That's mighty fine sippin liquor";
 
 		pMiner->GetFSM()->ChangeState(EnterMineAndDigForNuggets::Instance());
+	} else if (pMiner->Thirsty() && pMiner->Loser())
+	{
+		pMiner->BuyAndDrinkAWhiskey();
+		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
+			<< "I have to go";
+		pMiner->GetFSM()->ChangeState(GoHomeAndSleepTilRested::Instance());
 	}
 	else {
 		cout << "\nERROR\nERROR\nERROR";
@@ -44,11 +74,22 @@ void QuenchThirst::Execute(Miner * pMiner)
 
 void QuenchThirst::Exit(Miner * pMiner)
 {
-	cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
-		<< "Leavin' the saloon, feelin' good";
+	if(pMiner->Loser())
+	{
+		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
+			<< "Leavin' the saloon, but I lost the flyting";
+	}else
+	{
+		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
+			<< "Leavin' the saloon, feelin' good";
+	}
+	
+
+	delete m_StateMachineInsultFight;
 }
 
-bool QuenchThirst::OnMessage(Miner*, const Telegram&)
+bool QuenchThirst::OnMessage(Miner* miner, const Telegram& msg)
 {
-	return false;
+	return m_StateMachineInsultFight->HandleMessage(msg);
+
 }

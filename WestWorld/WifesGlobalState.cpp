@@ -7,7 +7,7 @@
 #include "time/CrudeTimer.h"
 #include "misc/ConsoleUtils.h"
 #include "CookStew.h"
-
+#include "MessageDispatcher.h"
 
 
 using namespace std;
@@ -45,6 +45,25 @@ bool WifesGlobalState::OnMessage(MinersWife * wife, const Telegram & msg)
 
 	switch(msg.msg)
 	{
+	case Msg_HoneyILost:
+		{
+			//wife suggest 3 more insult quotes to miner
+			cout << "\n" << GetNameOfEntity(wife->ID())
+				<< ": You need to learn more insult quotes. These are some examples.";
+			for (int i = 0; i <3 ; i++)
+			{
+				string quote = wife->GetInsultQuote();
+				Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+					wife->ID(),
+					ent_Miner_Bob,
+					Msg_LearnNewInsultQuote,
+					&quote);
+			}
+
+			cout << "\n" << GetNameOfEntity(wife->ID())
+				<< ": Those should be enough";
+		}
+		return true;
 	case Msg_HiHoneyImHome:
 		{
 		SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);

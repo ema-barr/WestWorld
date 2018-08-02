@@ -4,6 +4,9 @@
 #include "BaseGameEntity.h"
 #include "Locations.h"
 #include "StateMachine.h"
+#include <vector>
+#include <string>
+
 
 
 //the amount of gold a miner must have before he feels comfortable
@@ -18,11 +21,19 @@ const int TirednessThreshold = 5;
 class Miner : public BaseGameEntity 
 {
 private:
+
+	//the list of insult quotes known by the miner
+	std::vector<std::string> m_insultQuotes;
+	//the list of insult quotes available. The miner can't use the same quote twice a day
+	std::vector<std::string> m_insultQuotesAvailable; 
+
 	//an istance of the state machine class
 	StateMachine<Miner>* m_pStateMachine;
 
 	//the place where the miner is currently situated
 	location_type m_location;
+
+	bool m_loser;
 
 	//number nuggets in the pockets
 	int m_iGoldCarried;
@@ -64,7 +75,14 @@ public:
 	bool Fatigued() const;
 	void IncreaseFatigue();
 	void DecreaseFatigue();
-	
+
+	void SetInsultQuotes(const std::vector<std::string> * quotes);
+	void AddInsulQuote(const std::string &quote);
+	std::string GetInsultQuote();
+	void RememberInsultQuotes();
+
+	void SetLoser(bool loser);
+	bool Loser();
 };
 
 #endif // !MINER_H

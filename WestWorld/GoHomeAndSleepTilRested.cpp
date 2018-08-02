@@ -29,12 +29,25 @@ void GoHomeAndSleepTilRested::Enter(Miner * pMiner)
 		pMiner->ChangeLocation(shack);
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 			<< "Walkin' home";
-
-		Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
-			pMiner->ID(),
-			ent_Elsa,
-			Msg_HiHoneyImHome,
-			NO_ADDITIONAL_INFO);
+		if (pMiner->Loser())
+		{
+			cout << "\n" << GetNameOfEntity(pMiner->ID())
+				<<": Hi honey... I lost a flyting...";
+			
+			Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+				pMiner->ID(),
+				ent_Elsa,
+				Msg_HoneyILost,
+				NO_ADDITIONAL_INFO);
+		} else
+		{
+			Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+				pMiner->ID(),
+				ent_Elsa,
+				Msg_HiHoneyImHome,
+				NO_ADDITIONAL_INFO);
+		}
+		
 	}
 
 }
@@ -42,7 +55,7 @@ void GoHomeAndSleepTilRested::Enter(Miner * pMiner)
 
 void GoHomeAndSleepTilRested::Execute(Miner * pMiner)
 {
-	if (!pMiner->Fatigued()) {
+	if (!pMiner->Fatigued() && !pMiner->Loser()) {
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 			<< "What a God darn fantastic nap! Time to find more gold";
 
@@ -52,6 +65,9 @@ void GoHomeAndSleepTilRested::Execute(Miner * pMiner)
 		pMiner->DecreaseFatigue();
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 			<< "ZZZZ... ";
+
+		//the miner sleeps and forgets all 
+		pMiner->SetLoser(false);
 	}
 }
 
@@ -66,6 +82,12 @@ bool GoHomeAndSleepTilRested::OnMessage(Miner * pMiner, const Telegram & msg)
 
 	switch (msg.msg)
 	{
+	case Msg_LearnNewInsultQuote:
+		{
+			string newQuote = DereferenceToType<string>(msg.extraInfo);
+			pMiner->AddInsulQuote(newQuote);
+		}
+		return true;
 	case Msg_StewReady:
 		{
 			SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);

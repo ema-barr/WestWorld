@@ -1,16 +1,21 @@
 #ifndef QUENCH_THIRST_H
 #define QUENCH_THIRST_H
 #include "State.h"
+#include "StateMachine.h"
 
 class Miner;
 
 class QuenchThirst: public State<Miner>
 {
 private:
+	StateMachine<Miner> * m_StateMachineInsultFight;
 	QuenchThirst();
+
+	bool mInsulted;
 public:
 	static QuenchThirst* Instance();
 
+	StateMachine<Miner> * GetFSMInsultFight();
 
 	// Ereditato tramite State
 	virtual void Enter(Miner * pMiner) override;

@@ -1,12 +1,11 @@
-#ifndef MINERSWIFE_H
-#define MINERSWIFE_H
-
+#ifndef BARFLY_H
+#define BARFLY_H
 #include "BaseGameEntity.h"
-#include "StateMachine.h"
 #include "Locations.h"
 #include <vector>
+#include "StateMachine.h"
 
-class MinersWife: public BaseGameEntity
+class BarFly: public BaseGameEntity
 {
 private:
 	//the list of insult quotes known by the miner
@@ -14,34 +13,26 @@ private:
 	std::vector<std::string> m_insultQuotesAvailable;
 
 	//an instance of the state machine class
-	StateMachine<MinersWife>*  m_pStateMachine;
+	StateMachine<BarFly>*  m_pStateMachine;
 
 	location_type              m_Location;
 
 	bool m_bCooking;
 public:
-	MinersWife(int id);
-	~MinersWife();
+	BarFly(int id);
+	~BarFly();
 
 	void Update() override;
 	bool HandleMessage(const Telegram& message) override;
 
-	StateMachine<MinersWife>* GetFSM()const;
-
+	StateMachine<BarFly> * GetFSM() const;
 	location_type Location()const;
 	void ChangeLocation(const location_type loc);
-
-	void SetCooking(bool);
-	bool Cooking();
 
 	void SetInsultQuotes(const std::vector<std::string> * quotes);
 	void AddInsulQuote(const std::string &quote);
 	std::string GetInsultQuote();
+	void RememberInsultQuotes();
 };
 
-
-
-#endif // !MINERSWIFE_H
-
-
-
+#endif
