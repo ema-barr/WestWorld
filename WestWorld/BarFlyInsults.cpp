@@ -38,6 +38,31 @@ bool BarFlyInsults::OnMessage(BarFly * barFly, const Telegram & msg)
 {
 	switch (msg.msg)
 	{
+	case Msg_Fight:
+		{
+			std::string dereferencedMessage = " ";
+			if (msg.extraInfo != NO_ADDITIONAL_INFO)
+			{
+				dereferencedMessage	= DereferenceToType<std::string>(msg.extraInfo);
+			}
+			if (dereferencedMessage == "with bottle")
+			{
+				std::cout << "\n" << GetNameOfEntity(barFly->ID())
+					<< ": Please stop. I do not want to die. I am sorry";
+			} else
+			{
+				std::cout << "\n" << GetNameOfEntity(barFly->ID())
+					<< ": I am really sorry.";
+			}
+			Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+				barFly->ID(),
+				msg.sender,
+				Msg_Sorry,
+				NO_ADDITIONAL_INFO);
+
+			barFly->GetFSM()->RevertToPreviousState();
+		}
+		return true;
 	case Msg_InsultQuote:
 		{
 			std::string dereferencedMsg = " ";
@@ -54,7 +79,7 @@ bool BarFlyInsults::OnMessage(BarFly * barFly, const Telegram & msg)
 				//send a message to miner to inform he is a loser
 				Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 					barFly->ID(),
-					ent_Miner_Bob,
+					msg.sender,
 					Msg_YouAreALoser,
 					NO_ADDITIONAL_INFO);
 
@@ -70,7 +95,7 @@ bool BarFlyInsults::OnMessage(BarFly * barFly, const Telegram & msg)
 					//Bar fly does not know other insult quotes, so he lose
 					Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 						barFly->ID(),
-						ent_Miner_Bob,
+						msg.sender,
 						Msg_InsultQuote,
 						&quote);
 
@@ -83,7 +108,7 @@ bool BarFlyInsults::OnMessage(BarFly * barFly, const Telegram & msg)
 					//send an insult quote
 					Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 						barFly->ID(),
-						ent_Miner_Bob,
+						msg.sender,
 						Msg_InsultQuote,
 						&quote);
 				}

@@ -41,11 +41,12 @@ void GoHomeAndSleepTilRested::Enter(Miner * pMiner)
 				NO_ADDITIONAL_INFO);
 		} else
 		{
+			bool signs = pMiner->SignsStruggle();
 			Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 				pMiner->ID(),
 				ent_Elsa,
 				Msg_HiHoneyImHome,
-				NO_ADDITIONAL_INFO);
+				&signs);
 		}
 		
 	}
@@ -66,8 +67,11 @@ void GoHomeAndSleepTilRested::Execute(Miner * pMiner)
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "
 			<< "ZZZZ... ";
 
+		pMiner->SetSignsStruggle(false);
+
 		//the miner sleeps and forgets all 
 		pMiner->SetLoser(false);
+
 	}
 }
 

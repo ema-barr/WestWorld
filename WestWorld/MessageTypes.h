@@ -7,11 +7,16 @@ enum message_type
 	Msg_HiHoneyImHome,
 	Msg_StewReady,
 	Msg_TableFlip,
+	Msg_IsThereABottle,
+	Msg_TableAnswer,
 	Msg_MinerEntersSaloon,
 	Msg_InsultQuote,
 	Msg_YouAreALoser,
 	Msg_HoneyILost,
-	Msg_LearnNewInsultQuote
+	Msg_LearnNewInsultQuote,
+	Msg_Fight,
+	Msg_ThereWasAFight,
+	Msg_Sorry
 };
 
 inline std::string MsgToStr(int msg)
@@ -29,6 +34,12 @@ inline std::string MsgToStr(int msg)
 	case Msg_TableFlip:
 		return "TableFlip";
 
+	case Msg_IsThereABottle:
+		return "Msg_IsThereABottle";
+
+	case Msg_TableAnswer:
+		return "Msg_TableAnswer";
+
 	case Msg_MinerEntersSaloon:
 		return "Msg_MinerEntersSaloon";
 
@@ -43,6 +54,15 @@ inline std::string MsgToStr(int msg)
 
 	case Msg_LearnNewInsultQuote:
 		return "Msg_LearnNewInsultQuote";
+
+	case Msg_Fight:
+		return "Msg_Fight";
+
+	case Msg_ThereWasAFight:
+		return "Msg_ThereWasAFight";
+
+	case Msg_Sorry:
+		return "Msg_Sorry";
 
 	default:
 

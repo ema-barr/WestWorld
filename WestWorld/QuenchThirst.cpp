@@ -6,7 +6,6 @@
 #include <iostream>
 #include "MessageDispatcher.h"
 #include "MessageTypes.h"
-#include "MinerInsults.h"
 #include "MinerDrinkingState.h"
 #include "GoHomeAndSleepTilRested.h"
 #include "EntityManager.h"
@@ -14,7 +13,6 @@ using namespace std;
 
 QuenchThirst::QuenchThirst()
 {
-	mInsulted = false;
 }
 
 QuenchThirst * QuenchThirst::Instance()
@@ -54,10 +52,8 @@ void QuenchThirst::Enter(Miner * pMiner)
 
 void QuenchThirst::Execute(Miner * pMiner)
 {
-	if (mInsulted)
-	{
-		m_StateMachineInsultFight->Update();
-	} else if (pMiner->Thirsty() && !pMiner->Loser()) {
+	m_StateMachineInsultFight->Update();
+	if (pMiner->Thirsty() && !pMiner->Loser()) {
 		//if miner feel thirsty
 		pMiner->BuyAndDrinkAWhiskey();
 		cout << "\n" << GetNameOfEntity(pMiner->ID()) << ": "

@@ -5,6 +5,7 @@
 #include "misc/ConsoleUtils.h"
 #include "time/CrudeTimer.h"
 #include "FlippedTable.h"
+#include "MessageDispatcher.h"
 
 using namespace std;
 
@@ -30,6 +31,16 @@ bool TidyTable::OnMessage(Table * table, const Telegram & msg)
 {
 	switch(msg.msg)
 	{
+	case Msg_IsThereABottle:
+		{
+			bool bottle = table->TableWithBottle();
+			Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+				table->ID(),
+				msg.sender,
+				Msg_TableAnswer,
+				&bottle);
+		}
+		return true;
 	case Msg_TableFlip:
 
 		SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);

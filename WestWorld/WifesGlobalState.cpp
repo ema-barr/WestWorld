@@ -45,6 +45,11 @@ bool WifesGlobalState::OnMessage(MinersWife * wife, const Telegram & msg)
 
 	switch(msg.msg)
 	{
+	case Msg_ThereWasAFight:
+		{
+			wife->SetHusbandFought(true);
+		}
+		return true;
 	case Msg_HoneyILost:
 		{
 			//wife suggest 3 more insult quotes to miner
@@ -71,17 +76,38 @@ bool WifesGlobalState::OnMessage(MinersWife * wife, const Telegram & msg)
 		return true;
 	case Msg_HiHoneyImHome:
 		{
-		SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+			bool signsStruggle = false;
+			if (msg.extraInfo != NO_ADDITIONAL_INFO)
+			{
+				signsStruggle = DereferenceToType<bool>(msg.extraInfo);
+			}
 
-		cout << "\nMessage handled by " << GetNameOfEntity(wife->ID())
-			<< " at time: " << Clock->GetCurrentTime();
+			if (signsStruggle)
+			{
+				cout << "\n" << GetNameOfEntity(wife->ID()) <<
+					": Hi honey. Are you okay? Let me make some of mah fine country stew";
+				wife->GetFSM()->ChangeState(CookStew::Instance());
+			} else if (wife->HusbandFought())
+			{
+				cout << "\n" << GetNameOfEntity(wife->ID())
+					<< ": Hi. Tina told me you had a fight. Are you crazy? Go to sleep now !!!";
+				
+				wife->SetHusbandFought(false);
+			} else 
+			{
+				SetTextColor(BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
-		SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
+				cout << "\nMessage handled by " << GetNameOfEntity(wife->ID())
+					<< " at time: " << Clock->GetCurrentTime();
 
-		cout << "\n" << GetNameOfEntity(wife->ID()) <<
-			": Hi honey. Let me make some of mah fine country stew";
+				SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
-		wife->GetFSM()->ChangeState(CookStew::Instance());
+				cout << "\n" << GetNameOfEntity(wife->ID()) <<
+					": Hi honey. Let me make some of mah fine country stew";
+
+				wife->GetFSM()->ChangeState(CookStew::Instance());
+			}
+		
 		}
 		return true;
 	}

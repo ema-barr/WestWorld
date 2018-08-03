@@ -42,7 +42,7 @@ bool BarFlyDrinkingState::OnMessage(BarFly * barFly, const Telegram & msg)
 			SetTextColor(FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
 
 			std::cout << "\n" << GetNameOfEntity(barFly->ID())
-				<< ": Oh "<< GetNameOfEntity(msg.sender) <<"... here you are! " ;
+				<< ": Oh, "<< GetNameOfEntity(msg.sender) <<"... here you are! " ;
 
 			barFly->GetFSM()->ChangeState(BarFlyInsults::Instance());
 		}

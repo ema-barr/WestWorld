@@ -22,6 +22,7 @@ class Miner : public BaseGameEntity
 {
 private:
 
+
 	//the list of insult quotes known by the miner
 	std::vector<std::string> m_insultQuotes;
 	//the list of insult quotes available. The miner can't use the same quote twice a day
@@ -32,6 +33,8 @@ private:
 
 	//the place where the miner is currently situated
 	location_type m_location;
+
+	bool m_signOfStruggle;
 
 	bool m_loser;
 
@@ -68,6 +71,9 @@ public:
 	int Wealth() const;
 	void SetWealth(const int val);
 	void AddToWealth(const int val);
+
+	void SetSignsStruggle(bool);
+	bool SignsStruggle() const;
 
 	bool Thirsty() const;
 	void BuyAndDrinkAWhiskey();

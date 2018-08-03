@@ -2,6 +2,7 @@
 #include "MinerDrinkingState.h"
 #include "MessageTypes.h"
 #include "MinerInsults.h"
+#include "EntityNames.h"
 
 StateMachine<Miner> * MinerDrinkingState::mStateMachine = nullptr;
 
@@ -27,6 +28,8 @@ void MinerDrinkingState::Enter(Miner* pMiner)
 
 void MinerDrinkingState::Execute(Miner* pMiner)
 {
+	std::cout << "\n" << GetNameOfEntity(pMiner->ID())
+		<< " drinks his whiskey";
 }
 
 void MinerDrinkingState::Exit(Miner* pMiner)

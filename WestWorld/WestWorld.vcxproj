@@ -166,6 +166,7 @@
     <ClInclude Include="Miner.h" />
     <ClInclude Include="MinerDrinkingState.h" />
     <ClInclude Include="MinerInsults.h" />
+    <ClInclude Include="MinersMotherInsulted.h" />
     <ClInclude Include="MinersWife.h" />
     <ClInclude Include="misc\ConsoleUtils.h" />
     <ClInclude Include="QuenchThirst.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="BaseGameEntity.cpp" />
     <ClCompile Include="MinerDrinkingState.cpp" />
     <ClCompile Include="MinerInsults.cpp" />
+    <ClCompile Include="MinersMotherInsulted.cpp" />
     <ClCompile Include="MinersWife.cpp" />
     <ClCompile Include="QuenchThirst.cpp" />
     <ClCompile Include="stdafx.cpp">

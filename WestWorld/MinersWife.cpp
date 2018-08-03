@@ -55,6 +55,16 @@ bool MinersWife::Cooking()
 	return m_bCooking;
 }
 
+void MinersWife::SetHusbandFought(bool fought)
+{
+	m_husbandFought = fought;
+}
+
+bool MinersWife::HusbandFought() const
+{
+	return m_husbandFought;
+}
+
 void MinersWife::SetInsultQuotes(const std::vector<std::string>* quotes)
 {
 	m_insultQuotes = *quotes;

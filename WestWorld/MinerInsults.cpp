@@ -5,6 +5,7 @@
 #include "MessageDispatcher.h"
 #include "GoHomeAndSleepTilRested.h"
 #include "MinerDrinkingState.h"
+#include "MinersMotherInsulted.h"
 
 StateMachine<Miner> * MinerInsults::mStateMachine = nullptr;
 
@@ -65,11 +66,15 @@ bool MinerInsults::OnMessage(Miner * miner, const Telegram & msg)
 			//send a message to bar fly to inform he is a loser
 			Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 				miner->ID(),
-				ent_John,
+				msg.sender,
 				Msg_YouAreALoser,
 				NO_ADDITIONAL_INFO);
 
 			mStateMachine->ChangeState(MinerDrinkingState::Instance(mStateMachine));
+		} else if (dereferencedMsg.find("mom") != std::string::npos || dereferencedMsg.find("mother") != std::string::npos)
+		{
+			//Someone insulted miner's mother
+			mStateMachine->ChangeState(MinersMotherInsulted::Instance(mStateMachine));
 		}
 		else
 		{
@@ -83,7 +88,7 @@ bool MinerInsults::OnMessage(Miner * miner, const Telegram & msg)
 				//Miner does not know other insult quotes, so he lose
 				Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 					miner->ID(),
-					ent_John,
+					msg.sender,
 					Msg_InsultQuote,
 					&quote);
 
@@ -97,7 +102,7 @@ bool MinerInsults::OnMessage(Miner * miner, const Telegram & msg)
 				//send an insult quote
 				Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
 					miner->ID(),
-					ent_John,
+					msg.sender,
 					Msg_InsultQuote,
 					&quote);
 			}

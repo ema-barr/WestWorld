@@ -19,6 +19,8 @@ private:
 	location_type              m_Location;
 
 	bool m_bCooking;
+
+	bool m_husbandFought;
 public:
 	MinersWife(int id);
 	~MinersWife();
@@ -33,6 +35,10 @@ public:
 
 	void SetCooking(bool);
 	bool Cooking();
+
+	void SetHusbandFought(bool);
+	bool HusbandFought() const;
+
 
 	void SetInsultQuotes(const std::vector<std::string> * quotes);
 	void AddInsulQuote(const std::string &quote);

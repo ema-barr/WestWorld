@@ -11,7 +11,6 @@ private:
 	StateMachine<Miner> * m_StateMachineInsultFight;
 	QuenchThirst();
 
-	bool mInsulted;
 public:
 	static QuenchThirst* Instance();
 

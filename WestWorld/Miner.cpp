@@ -3,20 +3,20 @@
 #include "Miner.h"
 #include <cassert>
 
-#include "EnterMineAndDigForNuggets.h"
 #include "GoHomeAndSleepTilRested.h"
 #include <random>
 #include "misc/ConsoleUtils.h"
 
 
-Miner::Miner(int id):
+Miner::Miner(int id) :
 	BaseGameEntity(id),
 	m_location(shack),
 	m_iGoldCarried(0),
 	m_iMoneyInBank(0),
 	m_iThirst(0),
 	m_iFatigue(0),
-	m_loser(false)
+	m_loser(false),
+	m_signOfStruggle(false)
 {
 	//set up state machine
 	m_pStateMachine = new StateMachine<Miner>(this);
@@ -96,6 +96,16 @@ void Miner::AddToWealth(const int val) {
 
 	if (m_iMoneyInBank < 0)
 		m_iMoneyInBank = 0;
+}
+
+void Miner::SetSignsStruggle(bool signs)
+{
+	m_signOfStruggle = signs;
+}
+
+bool Miner::SignsStruggle() const
+{
+	return m_signOfStruggle;
 }
 
 bool Miner::Thirsty() const {
