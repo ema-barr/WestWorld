@@ -28,3 +28,10 @@ void EntityManager::RemoveEntity(BaseGameEntity * pEntity)
 {
 	m_EntityMap.erase(m_EntityMap.find(pEntity->ID()));
 }
+
+bool EntityManager::EntityRegistered(int id)
+{
+	//find the entity
+	EntityMap::const_iterator ent = m_EntityMap.find(id);
+	return ent != m_EntityMap.end();
+}

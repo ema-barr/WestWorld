@@ -9,6 +9,7 @@
 #include "MinerInsults.h"
 #include "MinerDrinkingState.h"
 #include "GoHomeAndSleepTilRested.h"
+#include "EntityManager.h"
 using namespace std;
 
 QuenchThirst::QuenchThirst()
@@ -39,12 +40,16 @@ void QuenchThirst::Enter(Miner * pMiner)
 	m_StateMachineInsultFight->SetCurrentState(MinerDrinkingState::Instance(m_StateMachineInsultFight));
 	m_StateMachineInsultFight->SetGlobalState(nullptr);
 
-	//alert the bar fly that Bob enters the saloon
-	Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
-		pMiner->ID(),
-		ent_John,
-		Msg_MinerEntersSaloon,
-		NO_ADDITIONAL_INFO);
+	if (EntityMgr->EntityRegistered(ent_John))
+	{
+		//alert the bar fly that Bob enters the saloon
+		Dispatch->DispatchMessages(SEND_MSG_IMMEDIATELY,
+			pMiner->ID(),
+			ent_John,
+			Msg_MinerEntersSaloon,
+			NO_ADDITIONAL_INFO);
+	}
+	
 }
 
 void QuenchThirst::Execute(Miner * pMiner)

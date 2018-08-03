@@ -31,6 +31,8 @@ public:
 	//this method removs the entity from the list
 	void RemoveEntity(BaseGameEntity* pEntity);
 
+	bool EntityRegistered(int id);
+
 };
 
 //provide easy access to the instance of the EntityManager

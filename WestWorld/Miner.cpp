@@ -6,6 +6,7 @@
 #include "EnterMineAndDigForNuggets.h"
 #include "GoHomeAndSleepTilRested.h"
 #include <random>
+#include "misc/ConsoleUtils.h"
 
 
 Miner::Miner(int id):
@@ -142,8 +143,13 @@ void Miner::AddInsultQuote(const std::string & quote)
 	{
 		m_insultQuotesAvailable.push_back(quote);
 		m_insultQuotes.push_back(quote);
-	} 
-	
+	}
+
+	SetTextColor(BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+	std::cout << "\n" << GetNameOfEntity(this->ID()) << " learnt a new insult quote: \"" << quote << "\"";
+
+	SetTextColor(FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+
 }
 
 std::string Miner::GetInsultQuote()
